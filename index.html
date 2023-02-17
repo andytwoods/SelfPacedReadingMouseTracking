@@ -50,7 +50,10 @@
   let mask = new PIXI.Graphics();
   // Add the rectangular area to show
   mask.beginFill(0xffffff);
-  mask.drawCircle(0, 0, 100);
+
+  const mask_height = 100;
+
+  mask.drawCircle(0, 0, mask_height);
   mask.endFill();
 
   // Add container that will hold our masked content
@@ -78,16 +81,18 @@
     With a smile on their face, Pooh began to sing a gentle, soothing song. Slowly but surely, the thorns began to recede, revealing a beautiful, lush garden hidden behind them.
 
     Pooh looked around at the beauty they had uncovered, feeling a sense of satisfaction and joy. They knew that they had done something good, something kind, and that was all that mattered.`
-  
+
 
   const style = new PIXI.TextStyle({
-    fontFamily: 'Arial',
+    fontName: "NumFont",
     fontSize: 36,
     wordWrap: true,
     lineHeight:150,
     align : 'center',
     wordWrapWidth: window.innerWidth
   });
+
+  PIXI.BitmapFont.from("NumFont", style);
 
   let text_blur = new PIXI.Text(
     some_text,
@@ -120,11 +125,17 @@
 
   frame.interactive = true;
   frame.on('mousemove', pointerMove);
+  frame.on('touchmove', touchMove);
 
+  const el = mask;
   function pointerMove(event) {
-    const el = mask;
     el.position.x = event.data.x;
     el.position.y = event.data.y;
+  }
+
+  function touchMove(event) {
+    el.position.x = event.data.x;
+    el.position.y = event.data.y - mask_height;
   }
 
 
