@@ -51,7 +51,7 @@
   // Add the rectangular area to show
   mask.beginFill(0xffffff);
 
-  const mask_height = 100;
+  const mask_height = 50;
 
   mask.drawCircle(0, 0, mask_height);
   mask.endFill();
@@ -68,36 +68,9 @@
   // And add the container to the window!
 
 
-  let some_text = `Winnie-the-Pooh strolled through the Hundred Acre Wood, enjoying the warm sunshine and gentle breeze. As they wandered, they couldn't help but feel a sense of contentment wash over them. Life was good.
 
-    As they walked, Pooh encountered their friends, who were all going about their own business. Rabbit was harvesting carrots, Tigger was bouncing around, and Eeyore was lamenting the latest misfortune to befall him. Pooh greeted them all warmly, happy to see their familiar faces.
-
-    As they continued on their way, Pooh came across a tree that they didn't recognize. It was tall and imposing, with a thick trunk and gnarled branches. Pooh was curious, and so they decided to investigate.
-
-  As they drew closer, Pooh noticed that the tree was covered in a dense tangle of thorns. They were sharp and jagged, and Pooh realized that they would have to be careful if they wanted to get any closer.
-
-    As they stood there, considering their next move, Pooh was struck by an idea. They remembered a time when they had been faced with a similar challenge, and had used kindness and compassion to overcome it.
-
-    With a smile on their face, Pooh began to sing a gentle, soothing song. Slowly but surely, the thorns began to recede, revealing a beautiful, lush garden hidden behind them.
-
-    Pooh looked around at the beauty they had uncovered, feeling a sense of satisfaction and joy. They knew that they had done something good, something kind, and that was all that mattered.`
-
-
-  const style = new PIXI.TextStyle({
-    fontName: "NumFont",
-    fontSize: 36,
-    wordWrap: true,
-    lineHeight:150,
-    align : 'center',
-    wordWrapWidth: window.innerWidth
-  });
-
-  PIXI.BitmapFont.from("NumFont", style);
-
-  let text_blur = new PIXI.Text(
-    some_text,
-    style
-  );
+  let text_blur = PIXI.Sprite.from('img/WinnieThey.JPG');
+  text_blur.width = window.innerWidth;
 
   var blurFilter = new PIXI.filters.BlurFilter();
   const blurContainer = new PIXI.Container();
@@ -107,10 +80,9 @@
   frame.addChild(maskContainer);
 
   // Create contents for the masked container
-  let text = new PIXI.Text(
-    some_text,
-    style
-  );
+  let text = PIXI.Sprite.from('img/WinnieThey.JPG');
+  text.width = window.innerWidth;
+
   maskContainer.beginFill =  fill_colour;
   let background =  new PIXI.Graphics()
     .beginFill(0xFFFFFF)
@@ -135,7 +107,7 @@
 
   function touchMove(event) {
     el.position.x = event.data.x;
-    el.position.y = event.data.y - mask_height;
+    el.position.y = event.data.y - mask_height*2;
   }
 
 
